@@ -1,7 +1,7 @@
 import React, {useState}  from 'react'
 import {Input,Button} from '@mui/material'
 import {db,auth} from '../firebase/config'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc , serverTimestamp } from 'firebase/firestore'
 
 function Sendmessage() {
     const [msg,setMsg] = useState('')
@@ -9,11 +9,13 @@ function Sendmessage() {
     async function sendMsg(e) {
         e.preventDefault()
         const {uid,photoURL} = auth.currentUser
-        
-        await addDoc(collection(db, "products"), {
+        console.log(uid,photoURL)
+        await addDoc(collection(db, "messages"), {
             text: msg,
             photoURL: photoURL,
-            uid: uid
+            uid: uid,
+            createdAt: serverTimestamp()
+
         })
         
         setMsg('')
