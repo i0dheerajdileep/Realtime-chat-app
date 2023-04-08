@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Signin from '../src/components/Signin'
 import Chat from '../src/components/Chat'
